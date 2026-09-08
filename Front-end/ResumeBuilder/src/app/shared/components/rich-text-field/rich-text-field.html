@@ -1,0 +1,104 @@
+<div class="flex flex-col gap-y-1">
+  <span class="text-sm font-bold">{{ label() }}</span>
+  <div
+    (mousedown)="$event.preventDefault()"
+    class="flex flex-wrap items-center gap-1 rounded-t-md border border-b-0 border-gray-200 bg-gray-50 p-1"
+  >
+    <button
+      type="button"
+      (click)="toggleBold()"
+      [class.bg-gray-300]="activeFormats().has('bold')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'bold'" size="15" />
+    </button>
+    <button
+      type="button"
+      (click)="toggleItalic()"
+      [class.bg-gray-300]="activeFormats().has('italic')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'italic'" size="15" />
+    </button>
+    <button
+      type="button"
+      (click)="toggleUnderline()"
+      [class.bg-gray-300]="activeFormats().has('underline')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'underline'" size="15" />
+    </button>
+    <span class="mx-1 h-5 w-px bg-gray-300"></span>
+    <button
+      type="button"
+      (click)="toggleOrderedList()"
+      [class.bg-gray-300]="activeFormats().has('orderedList')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'list-ordered'" size="15" />
+    </button>
+    <button
+      type="button"
+      (click)="toggleBulletList()"
+      [class.bg-gray-300]="activeFormats().has('bulletList')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'list'" size="15" />
+    </button>
+    <span class="mx-1 h-5 w-px bg-gray-300"></span>
+    <button
+      type="button"
+      (click)="toggleLink()"
+      [class.bg-gray-300]="activeFormats().has('link')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'link'" size="15" />
+    </button>
+    <span class="mx-1 h-5 w-px bg-gray-300"></span>
+    <button
+      type="button"
+      (click)="setTextAlign('left')"
+      [class.bg-gray-300]="activeFormats().has('align-left')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'text-align-start'" size="15" />
+    </button>
+    <button
+      type="button"
+      (click)="setTextAlign('center')"
+      [class.bg-gray-300]="activeFormats().has('align-center')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'text-align-center'" size="15" />
+    </button>
+    <button
+      type="button"
+      (click)="setTextAlign('right')"
+      [class.bg-gray-300]="activeFormats().has('align-right')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'text-align-end'" size="15" />
+    </button>
+    <button
+      type="button"
+      (click)="setTextAlign('justify')"
+      [class.bg-gray-300]="activeFormats().has('align-justify')"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'text-align-justify'" size="15" />
+    </button>
+    <span class="mx-1 h-5 w-px bg-gray-300"></span>
+    <button
+      type="button"
+      (click)="clearFormatting()"
+      class="cursor-pointer rounded p-1.5 hover:bg-gray-200"
+    >
+      <lucide-icon [name]="'remove-formatting'" size="15" />
+    </button>
+  </div>
+  <tiptap-editor
+    [editor]="editor"
+    [outputFormat]="'html'"
+    class="rich-text rich-text-editor-host block rounded-b-md bg-gray-100 px-3 py-2 text-sm"
+  ></tiptap-editor>
+</div>

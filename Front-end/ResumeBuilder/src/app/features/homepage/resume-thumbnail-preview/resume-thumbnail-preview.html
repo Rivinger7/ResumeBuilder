@@ -1,0 +1,9 @@
+<div class="h-full w-full overflow-hidden bg-white">
+  <div
+    [style.width.px]="previewWidth"
+    [style.transform]="'scale(' + scale() + ')'"
+    style="transform-origin: top left"
+  >
+    <app-resume-preview [resume]="resume()" />
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="flex flex-col gap-1 px-6 py-8 item" [ngStyle]="headerStyle()">
+  <p class="font-bold text-white text-[2em]">
+    {{ personalInfo()?.fullName || 'Title' }}
+  </p>
+  @if (personalInfo()?.professionalTitle) {
+    <p class="italic text-white text-[1.45em]">
+      {{ personalInfo()!.professionalTitle }}
+    </p>
+  }
+  @if (personalInfo()) {
+    <div class="gap-2 text-white/90" [ngClass]="contactClass()">
+      @for (contact of contacts(); track contact; let last = $last) {
+        <span class="flex items-center gap-1">
+          @if (isVisibleContactIcons()) {
+            <span [ngClass]="contactIconClass()">
+              @switch (contact.type) {
+                @case ('email') {
+                  <lucide-icon class="size-[1em]" name="mail"></lucide-icon>
+                }
+
+                @case ('phone') {
+                  <lucide-icon class="size-[1em]" name="phone"></lucide-icon>
+                }
+
+                @case ('address') {
+                  <lucide-icon class="size-[1em]" name="map-pin"></lucide-icon>
+                }
+
+                @case ('website') {
+                  <lucide-icon class="size-[1em]" name="globe"></lucide-icon>
+                }
+
+                @case ('linkedin') {
+                  <fa-icon class="text-[1em]" [icon]="faLinkedin"></fa-icon>
+                }
+
+                @case ('github') {
+                  <fa-icon class="text-[1em]" [icon]="faGithub"></fa-icon>
+                }
+              }
+            </span>
+          }
+
+          <span>{{ contact.value }}</span>
+
+          @if (!last && contactMarker()) {
+            <span>{{ contactMarker() }}</span>
+          }
+        </span>
+      }
+    </div>
+  }
+</div>

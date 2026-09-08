@@ -1,0 +1,27 @@
+<div class="relative w-180 max-w-[90vw] rounded-lg bg-white p-8">
+  <button
+    type="button"
+    (click)="close()"
+    class="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-gray-700"
+  >
+    <lucide-icon [name]="XIcon" size="20" />
+  </button>
+
+  <p class="mb-6 text-2xl font-bold">Add content</p>
+
+  <div class="grid grid-cols-4 gap-3">
+    @for (type of options; track type) {
+      <button
+        type="button"
+        (click)="select(type)"
+        class="flex cursor-pointer flex-col gap-y-1 rounded-md bg-gray-100 p-3 text-left hover:bg-gray-200"
+      >
+        <span class="flex items-center gap-1.5 font-bold">
+          <lucide-icon [name]="SECTION_ICONS[type]" size="16" />
+          {{ type }}
+        </span>
+        <span class="text-xs text-gray-500">{{ SECTION_DESCRIPTIONS[type] }}</span>
+      </button>
+    }
+  </div>
+</div>

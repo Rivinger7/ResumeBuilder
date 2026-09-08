@@ -1,0 +1,12 @@
+<div class="flex flex-row items-baseline justify-between">
+  <p class="font-bold">{{ entry().title }}</p>
+  <p class="text-[#757575]">
+    {{ formatDateRange(entry().startDate, entry().endDate, false) }}
+  </p>
+</div>
+@if (entry().subTitle) {
+  <p class="italic">{{ entry().subTitle }}</p>
+}
+@if (entry().description) {
+  <div class="rich-text" [innerHTML]="convertToDescriptionHtml(entry().description)"></div>
+}

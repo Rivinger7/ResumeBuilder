@@ -1,0 +1,147 @@
+<div class="" hlmSidebarWrapper>
+  <hlm-sidebar>
+    <div hlmSidebarContent>
+      <div hlmSidebarGroup>
+        <div hlmSidebarGroupLabel>Platform</div>
+        <div hlmSidebarGroupContent>
+          <ul class="text-lg font-semibold" hlmSidebarMenu>
+            @for (item of mainNavItems; track item.label) {
+              <li hlmSidebarMenuItem>
+                <a
+                  hlmSidebarMenuButton
+                  [routerLink]="item.route"
+                  routerLinkActive=""
+                  [routerLinkActiveOptions]="{ exact: false }"
+                >
+                  <lucide-icon [name]="item.icon" />
+                  <span>{{ item.label }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div hlmSidebarFooter>
+      <ul hlmSidebarMenu>
+        <li hlmSidebarMenuItem>
+          <button
+            hlmSidebarMenuButton
+            class="h-auto py-2 hover:bg-[#DCDCDB] hover:cursor-pointer"
+            [hlmDropdownMenuTrigger]="menu"
+          >
+            <div class="flex items-center gap-2 flex-1 min-w-0">
+              <div class="w-8 h-8 rounded-full overflow-hidden shrink-0 bg-neutral-800">
+                <img
+                  [src]="
+                    userProfile()?.avatarUrl ??
+                    'https://res.cloudinary.com/dofnn7sbx/image/upload/v1785929643/people_1673438834_q8oahm.webp'
+                  "
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="flex flex-col items-start min-w-0">
+                <span class="text-sm font-semibold truncate">{{
+                  userProfile()?.fullName ?? 'Anonymous'
+                }}</span>
+                <span class="text-xs text-muted-foreground truncate">{{
+                  userProfile()?.email ?? 'Anonymous'
+                }}</span>
+              </div>
+            </div>
+            <lucide-icon class="ml-auto shrink-0" [name]="ChevronUpIcon" size="16" />
+          </button>
+
+          <ng-template #menu>
+            <hlm-dropdown-menu class="w-64">
+              @if (userProfile()) {
+                <!-- User info header -->
+                <div class="flex items-center gap-2 px-2 py-2">
+                  <div class="w-8 h-8 rounded-full overflow-hidden shrink-0 bg-neutral-800">
+                    <img
+                      [src]="userProfile()?.avatarUrl"
+                      alt=""
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex flex-col min-w-0">
+                    <span class="text-sm font-semibold truncate">{{
+                      userProfile()?.fullName
+                    }}</span>
+                    <span class="text-xs text-muted-foreground truncate">{{
+                      userProfile()?.email
+                    }}</span>
+                  </div>
+                </div>
+
+                <hlm-dropdown-menu-separator />
+
+                <button
+                  class="hover:bg-linear-to-r! hover:from-sky-500! hover:via-violet-500! hover:to-fuchsia-500! hover:cursor-pointer transition-color duration-200"
+                  hlmDropdownMenuItem
+                >
+                  <lucide-icon [name]="SparklesIcon" size="16" class="mr-2" />
+                  Upgrade to Pro
+                </button>
+
+                <hlm-dropdown-menu-separator />
+
+                <button
+                  class="hover:bg-[#C4C4C3]! hover:cursor-pointer transition-color duration-200"
+                  hlmDropdownMenuItem
+                >
+                  <lucide-icon [name]="CircleUserIcon" size="16" class="mr-2" />
+                  Account
+                </button>
+                <button
+                  class="hover:bg-[#C4C4C3]! hover:cursor-pointer transition-color duration-200"
+                  hlmDropdownMenuItem
+                >
+                  <lucide-icon [name]="CreditCardIcon" size="16" class="mr-2" />
+                  Billing
+                </button>
+                <button
+                  class="hover:bg-[#C4C4C3]! hover:cursor-pointer transition-color duration-200"
+                  hlmDropdownMenuItem
+                >
+                  <lucide-icon [name]="BellIcon" size="16" class="mr-2" />
+                  Notifications
+                </button>
+
+                <hlm-dropdown-menu-separator />
+
+                <button
+                  class="hover:bg-red-400! hover:cursor-pointer transition-color duration-200"
+                  hlmDropdownMenuItem
+                  (click)="logout()"
+                >
+                  <lucide-icon [name]="LogOutIcon" size="16" class="mr-2" />
+                  Log out
+                </button>
+              } @else {
+                <button
+                  class="hover:bg-[#C4C4C3]! hover:cursor-pointer transition-all duration-300"
+                  hlmDropdownMenuItem
+                  (click)="openLoginDialog()"
+                >
+                  <lucide-icon class="mr-2" [name]="LogInIcon" size="16" />
+                  Login
+                </button>
+                <button
+                  class="hover:bg-[#C4C4C3]! hover:cursor-pointer transition-all duration-300"
+                  hlmDropdownMenuItem
+                  (click)="openRegisterDialog()"
+                >
+                  <lucide-icon class="mr-2" [name]="UserKeyIcon" size="16" />
+                  Register
+                </button>
+              }
+            </hlm-dropdown-menu>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+  </hlm-sidebar>
+  <ng-content />
+</div>

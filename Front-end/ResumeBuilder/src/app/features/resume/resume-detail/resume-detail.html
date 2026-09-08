@@ -1,0 +1,90 @@
+<main class="flex h-[calc(100vh-3rem)] flex-col overflow-hidden bg-[#F7F4EE] px-60 pt-4 pb-10">
+  @if (resume(); as resume) {
+    <div class="mb-4 flex shrink-0 items-center justify-between">
+      <div class="flex flex-col">
+        <p class="text-xl font-bold">{{ resume.title }}</p>
+        <p class="text-sm text-gray-500">{{ resume.status }}</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          (click)="saveNow()"
+          [disabled]="isSavingThumbnail()"
+          class="cursor-pointer rounded-md border border-gray-300 px-4 py-2 font-bold hover:bg-gray-50 disabled:opacity-50"
+        >
+          <div class="flex flex-row items-center gap-x-2">
+            {{ isSavingThumbnail() ? 'Saving...' : 'Save' }}
+            <lucide-icon class="size-[1em]" name="Save"></lucide-icon>
+          </div>
+        </button>
+        <button
+          type="button"
+          (click)="downloadPdf()"
+          [disabled]="isDownloading()"
+          class="cursor-pointer rounded-md bg-[#1B3A5C] px-4 py-2 font-bold text-white hover:opacity-90 disabled:opacity-50"
+        >
+          <div class="flex flex-row items-center gap-x-2">
+            {{ isDownloading() ? 'Preparing PDF...' : 'Download' }}
+            <lucide-icon class="size-[1em]" name="Download"></lucide-icon>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- zoom (not transform) so it's a real, reflowing magnification — keeps every existing
+    style (font, line-height, spacing...) proportionally intact, just bigger. Each side's
+    width is pre-shrunk by its own zoom factor so the zoomed-back-up result exactly fills
+    its column instead of overflowing it. Preview zooms more since it's the focal content. -->
+    <div class="grid min-h-0 flex-1 grid-cols-7 gap-x-4">
+      <div class="col-span-3 h-full overflow-y-auto scrollbar-none">
+        <div class="flex flex-col gap-y-4 w-full zoom-[1.15]">
+          @if (editingSectionId() === null || editingSectionId() === 'personal') {
+            <app-personal-info-card
+              [resumeSectionId]="personalInfoSection()?.id ?? ''"
+              [personalInfo]="personalInfoSection()?.personalInformationEntries?.[0] ?? null"
+              (changed)="onSectionChanged()"
+              (editingChanged)="onPersonalEditingChanged($event)"
+            />
+          }
+
+          <div
+            cdkDropList
+            class="flex flex-col gap-y-4"
+            (cdkDropListDropped)="onSectionDrop($event)"
+          >
+            @for (section of visibleSections(); track section.id) {
+              <div cdkDrag cdkDragPreviewContainer="global">
+                <app-section-card
+                  [section]="section"
+                  (changed)="onSectionChanged()"
+                  (reordered)="onEntryReordered(section.id, $event)"
+                  (deleted)="onSectionDeleted(section.id)"
+                  (editingChanged)="onSectionEditingChanged(section.id, $event)"
+                />
+              </div>
+            }
+          </div>
+
+          @if (editingSectionId() === null) {
+            <button
+              type="button"
+              (click)="openAddContent()"
+              class="cursor-pointer rounded-md bg-[#1B3A5C] py-3 font-bold text-white hover:opacity-90"
+            >
+              + Add Content
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="col-span-4 h-full overflow-y-auto scrollbar-none">
+        <div class="w-full">
+          <app-resume-preview [resume]="resume" />
+        </div>
+      </div>
+    </div>
+  } @else {
+    <p class="text-gray-500">Loading...</p>
+  }
+</main>

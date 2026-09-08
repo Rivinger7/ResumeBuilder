@@ -1,0 +1,43 @@
+import { ResumeSectionType } from '../../core/models/resume-model';
+
+export const SECTION_ICONS: Record<ResumeSectionType, string> = {
+  [ResumeSectionType.PersonalInformation]: 'users',
+  [ResumeSectionType.Summary]: 'file-text',
+  [ResumeSectionType.Objective]: 'puzzle',
+  [ResumeSectionType.Education]: 'graduation-cap',
+  [ResumeSectionType.Experience]: 'briefcase',
+  [ResumeSectionType.Skills]: 'sparkles',
+  [ResumeSectionType.Projects]: 'folder-open',
+  [ResumeSectionType.Certificates]: 'award',
+  [ResumeSectionType.Languages]: 'languages',
+  [ResumeSectionType.Interests]: 'heart',
+  [ResumeSectionType.Courses]: 'book-open',
+  [ResumeSectionType.Awards]: 'trophy',
+  [ResumeSectionType.Organizations]: 'building-2',
+  [ResumeSectionType.Publications]: 'newspaper',
+  [ResumeSectionType.References]: 'users',
+  [ResumeSectionType.Declaration]: 'file-signature',
+  [ResumeSectionType.Achievements]: 'puzzle',
+  [ResumeSectionType.Custom]: 'puzzle',
+};
+
+export const SECTION_DESCRIPTIONS: Record<ResumeSectionType, string> = {
+  [ResumeSectionType.PersonalInformation]: '',
+  [ResumeSectionType.Summary]: 'Add a short summary of your key strengths and career goals.',
+  [ResumeSectionType.Objective]: 'State your career objective.',
+  [ResumeSectionType.Education]: 'Add your degrees and schools.',
+  [ResumeSectionType.Experience]: 'Add your professional roles and employer history.',
+  [ResumeSectionType.Skills]: 'Add your hard and soft skills.',
+  [ResumeSectionType.Projects]: 'Add key projects you participated in.',
+  [ResumeSectionType.Certificates]: 'Add your industry certificates or licences.',
+  [ResumeSectionType.Languages]: 'Add your languages and proficiency level.',
+  [ResumeSectionType.Interests]: 'Add relevant personal interests.',
+  [ResumeSectionType.Courses]: 'Add online or in-person courses you completed.',
+  [ResumeSectionType.Awards]: 'Add your awards and recognitions.',
+  [ResumeSectionType.Organizations]: 'Add your memberships or volunteering.',
+  [ResumeSectionType.Publications]: 'Add publications, articles, or books you wrote.',
+  [ResumeSectionType.References]: 'Add your references from managers or coworkers.',
+  [ResumeSectionType.Declaration]: 'Add your declaration.',
+  [ResumeSectionType.Achievements]: 'Add your notable achievements.',
+  [ResumeSectionType.Custom]: 'Add a custom section for anything else.',
+};

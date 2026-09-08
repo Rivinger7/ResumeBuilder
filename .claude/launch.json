@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "resume-builder-fe",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "Front-end/ResumeBuilder", "start"],
+      "port": 4200
+    }
+  ]
+}

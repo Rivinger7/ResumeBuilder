@@ -1,0 +1,79 @@
+<div
+  class="w-full bg-white text-black shadow-md"
+  style="aspect-ratio: 210 / 297"
+  [ngStyle]="containerStyle()"
+>
+  <!-- Header: mirrors ResumeDocument.cs ComposeHeader -->
+  <div>
+    <app-personal-information-seciton-preview
+      [personalInfo]="personalInfo()"
+      [personalInfoSettings]="personalInfoSettings()"
+    />
+
+    <!-- Body: mirrors ResumeDocument.cs Compose (sections ordered by displayOrder) -->
+    <div class="flex flex-col py-5 overflow-auto break-normal" [ngStyle]="bodyStyle()">
+      @for (section of sections(); track section.id) {
+        <div class="flex flex-col gap-y-1">
+          <p class="font-bold uppercase" [ngStyle]="sectionTitleStyle()">
+            {{ section.title }}
+          </p>
+          <div class="border-t border-2 border-[#202020] -mt-1"></div>
+
+          <div class="flex flex-col gap-2 pt-0.5">
+            @switch (section.type) {
+              @case (ResumeSectionType.Summary) {
+                @for (entry of section.summaryEntries; track $index) {
+                  <app-summary-section-preview [entry]="entry" />
+                }
+              }
+
+              @case (ResumeSectionType.Objective) {
+                @for (entry of section.objectiveEntries; track $index) {
+                  <app-objective-section-preview [entry]="entry" />
+                }
+              }
+
+              @case (ResumeSectionType.Education) {
+                @for (entry of section.educationEntries; track $index) {
+                  <app-education-section-preview [entry]="entry" />
+                }
+              }
+
+              @case (ResumeSectionType.Experience) {
+                @for (entry of section.experienceEntries; track $index) {
+                  <app-experience-section-preview [entry]="entry" />
+                }
+              }
+
+              @case (ResumeSectionType.Projects) {
+                @for (entry of section.projectEntries; track $index) {
+                  <app-project-section-preview [entry]="entry" />
+                }
+              }
+
+              @case (ResumeSectionType.Certificates) {
+                <div [ngStyle]="certificateLayoutStyle(section)">
+                  @for (entry of section.certificateEntries; track $index) {
+                    <app-certificate-section-preview [entry]="entry" />
+                  }
+                </div>
+              }
+
+              @case (ResumeSectionType.Languages) {
+                @for (entry of section.languageEntries; track $index) {
+                  <app-language-section-preview [entry]="entry" />
+                }
+              }
+
+              @case (ResumeSectionType.Skills) {
+                @for (entry of section.skillEntries; track $index) {
+                  <app-skill-section-preview [entry]="entry" />
+                }
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

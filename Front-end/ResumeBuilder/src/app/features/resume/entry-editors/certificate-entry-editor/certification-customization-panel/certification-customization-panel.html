@@ -1,0 +1,37 @@
+<div class="flex flex-col gap-y-5 bg-gray-50 p-5">
+  <h3 class="text-lg font-bold">Certificate</h3>
+  <div class="flex flex-col gap-y-2">
+    <span class="text-sm font-semibold">Layout</span>
+    <app-toggle-button-group
+      [options]="layoutOptions"
+      [value]="customization().certificateLayout"
+      [columns]="2"
+      (changed)="onLayoutChange($event)"
+    />
+    @if (customization().certificateLayout === 'Grid') {
+      <span class="text-sm font-semibold">Grid Columns</span>
+      <app-toggle-button-group
+        [options]="gridColumnOptions"
+        [value]="customization().certificateGridColumn"
+        [columns]="4"
+        (changed)="emitChange({ certificateGridColumn: $event })"
+      />
+    }
+    @if (customization().certificateLayout === 'Rows') {
+      <span class="text-sm font-semibold">Row Spacing</span>
+      <app-toggle-button-group
+        [options]="rowSpacingOptions"
+        [value]="customization().certificateRowSpacing"
+        [columns]="2"
+        (changed)="emitChange({ certificateRowSpacing: $event })"
+      />
+      <span class="text-sm font-semibold">Subinfo</span>
+      <app-toggle-button-group
+        [options]="subinfoStyleOptions"
+        [value]="customization().subinfoStyle"
+        [columns]="2"
+        (changed)="emitChange({ subinfoStyle: $event })"
+      />
+    }
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="flex flex-col gap-y-4">
+  <div class="flex flex-col gap-y-4 rounded-lg border border-gray-200 bg-white p-5">
+    <p class="text-lg font-bold">Edit Entry</p>
+
+    <form [formGroup]="form" class="flex flex-col gap-y-4">
+      <div class="flex flex-col gap-y-1">
+        <span class="text-sm font-bold">Title</span>
+        <div class="flex gap-2">
+          <input formControlName="title" class="w-full rounded-md bg-gray-100 px-3 py-2 text-sm" />
+          <span
+            class="flex shrink-0 items-center gap-1 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium"
+          >
+            <lucide-icon [name]="'link'" size="14" />
+            Link
+          </span>
+        </div>
+        <input
+          formControlName="linkUrl"
+          placeholder="https://..."
+          type="url"
+          inputmode="url"
+          autocomplete="url"
+          class="rounded-md bg-gray-100 px-3 py-2 text-sm"
+        />
+        @if (form.controls.linkUrl.invalid && form.controls.linkUrl.touched) {
+          <p class="text-sm text-red-600">
+            Please input a valid URL, starting with http:// or https://
+          </p>
+        }
+      </div>
+
+      <app-rich-text-field label="Description" formControlName="description" />
+    </form>
+
+    <app-entry-editor-actions [disabled]="form.invalid" (cancel)="cancel()" (save)="save()" />
+  </div>
+
+  <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
+    <button
+      type="button"
+      (click)="toggleCustomization()"
+      class="flex w-full cursor-pointer items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50"
+      [class.border-b]="isStyleCustomizationVisible()"
+      [class.border-gray-200]="isStyleCustomizationVisible()"
+    >
+      <lucide-icon [name]="'settings-2'" size="16" />
+      {{ isStyleCustomizationVisible() ? 'Hide' : 'Show' }} customizations for this section
+      <lucide-icon
+        [name]="'chevron-down'"
+        size="14"
+        class="ml-auto transition-transform"
+        [class.rotate-180]="isStyleCustomizationVisible()"
+      />
+    </button>
+
+    @if (isStyleCustomizationVisible()) {
+      <app-certification-customization-panel
+        [customization]="customization()"
+        (customizationChange)="onCustomizationChange($event)"
+      />
+    }
+  </div>
+</div>

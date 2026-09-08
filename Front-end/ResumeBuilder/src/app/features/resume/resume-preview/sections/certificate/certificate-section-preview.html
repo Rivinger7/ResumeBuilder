@@ -1,0 +1,21 @@
+<div class="">
+  @if (entry().certificateUrl) {
+    <a
+      class="inline-flex items-center gap-1 font-bold text-black no-underline hover:text-gray-700"
+      [href]="entry().certificateUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span>{{ entry().title }}</span>
+      <lucide-icon name="link" class="size-3.5" />
+    </a>
+  } @else {
+    <p class="font-bold text-black">
+      {{ entry().title }}
+    </p>
+  }
+
+  @if (entry().description) {
+    <div class="rich-text" [innerHTML]="convertTodescriptionHtml(entry().description)"></div>
+  }
+</div>

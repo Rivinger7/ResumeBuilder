@@ -1,0 +1,3 @@
+namespace ResumeBuilder.Application.Features.Entries.PersonalInformations.Updates;
+
+public sealed record UpdatePersonalInformationEntryStyleResponse();

@@ -1,0 +1,43 @@
+<app-sidebar>
+  <main hlmSidebarInset>
+    <div class="flex flex-row h-12 items-center justify-between px-4">
+      <button class="cursor-pointer" hlmSidebarTrigger><span class="sr-only"></span></button>
+      <div class="flex flex-row gap-x-8">
+        @if (!isAuthenticated()) {
+          <div class="flex flex-row" hlmButtonGroup>
+            <button
+              class="cursor-pointer w-20 bg-[#FFFFFF]"
+              hlmBtn
+              variant="outline"
+              (click)="openLoginDialog()"
+            >
+              <span class="text-[#1F2937] font-bold">Login</span>
+            </button>
+            <button
+              class="cursor-pointer w-20 bg-[#1F2937] hover:bg-[#111827]"
+              hlmBtn
+              variant="secondary"
+              (click)="openRegisterDialog()"
+            >
+              <span class="text-[#FFFFFF] font-bold">Register</span>
+            </button>
+          </div>
+        }
+        <hlm-select [value]="'en'" [itemToString]="itemToString">
+          <hlm-select-trigger class="w-40">
+            <hlm-select-value placeholder="Select language" />
+          </hlm-select-trigger>
+
+          <hlm-select-content class="max-h-96" *hlmSelectPortal showScroll>
+            @for (language of languages; track language.value) {
+              <hlm-select-item class="py-2" [value]="language.value">
+                {{ language.label }}
+              </hlm-select-item>
+            }
+          </hlm-select-content>
+        </hlm-select>
+      </div>
+    </div>
+    <router-outlet />
+  </main>
+</app-sidebar>

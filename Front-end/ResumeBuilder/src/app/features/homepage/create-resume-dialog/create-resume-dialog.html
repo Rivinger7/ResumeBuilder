@@ -1,0 +1,57 @@
+<div class="bg-[#FAF9F6] rounded-2xl min-w-md">
+  <div class="flex flex-1 flex-col px-6 pt-6 pb-4">
+    <h2 class="text-2xl font-bold text-neutral-900">Create resume</h2>
+    <p class="text-sm text-[#112A46]">Give your resume a title to get started</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mt-8">
+        <div hlmFieldGroup>
+          <div class="space-y-3">
+            <div hlmField>
+              <label hlmFieldLabel for="create-resume-title">Title</label>
+              <input
+                hlmInput
+                id="create-resume-title"
+                type="text"
+                placeholder="e.g. Backend Developer Resume"
+                formControlName="title"
+              />
+              @if (form.get('title')?.invalid && form.get('title')?.touched) {
+                <p hlmFieldDescription class="text-red-500">Title is required.</p>
+              }
+            </div>
+            <div hlmField>
+              <label hlmFieldLabel for="create-resume-description">Description (optional)</label>
+              <input
+                hlmInput
+                id="create-resume-description"
+                type="text"
+                placeholder="A short note about this resume"
+                formControlName="description"
+              />
+            </div>
+          </div>
+
+          @if (submitError()) {
+            <p class="text-red-500 text-sm">{{ submitError() }}</p>
+          }
+
+          <div class="flex flex-row justify-end gap-3">
+            <button
+              class="hover:cursor-pointer!"
+              hlmBtn
+              variant="outline"
+              type="button"
+              (click)="close()"
+            >
+              Cancel
+            </button>
+            <button class="hover:cursor-pointer!" hlmBtn type="submit" [disabled]="isSubmitting()">
+              {{ isSubmitting() ? 'Creating...' : 'Create' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

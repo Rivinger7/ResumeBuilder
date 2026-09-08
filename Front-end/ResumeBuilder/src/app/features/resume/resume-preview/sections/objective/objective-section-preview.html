@@ -1,0 +1,6 @@
+@if (entry().title) {
+  <p class="font-bold">{{ entry().title }}</p>
+}
+@if (entry().description) {
+  <div class="rich-text" [innerHTML]="convertToDescriptionHtml(entry().description)"></div>
+}

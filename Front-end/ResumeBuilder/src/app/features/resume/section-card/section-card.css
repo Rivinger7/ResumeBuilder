@@ -1,0 +1,42 @@
+/* Animation for CDK Drop List */
+.fade-enter {
+  animation: fadeSlideIn 180ms ease-out;
+}
+
+.fade-leave {
+  animation: fadeSlideOut 120ms ease-in;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* CDK reorder — không có sẵn transition, phải tự thêm để items "nhường chỗ" mượt khi kéo thả. */
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+:host {
+  display: block;
+}

@@ -1,0 +1,195 @@
+<div class="bg-[#FAF9F6] rounded-2xl min-w-md overflow-hidden">
+  @if (mode() === 'login') {
+    <div class="flex flex-1 flex-col px-6 pt-6 pb-4">
+      <h2 class="text-2xl font-bold text-neutral-900">Welcome back</h2>
+      <p class="text-sm text-[#112A46]">Login to your account</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <div class="mt-8">
+          <!-- input email, password -->
+          <div hlmFieldGroup>
+            <div class="space-y-3">
+              <div hlmField>
+                <label hlmFieldLabel for="field-separator-email">Email</label>
+                <input
+                  hlmInput
+                  id="field-separator-email"
+                  type="email"
+                  placeholder="m@example.com"
+                  formControlName="email"
+                />
+              </div>
+              <div hlmField>
+                <label hlmFieldLabel for="field-separator-password">Password</label>
+                <input
+                  hlmInput
+                  id="field-separator-password"
+                  type="password"
+                  placeholder="Your password"
+                  formControlName="password"
+                />
+              </div>
+            </div>
+            <div hlmField>
+              <button class="hover:cursor-pointer!" hlmBtn type="submit">Login</button>
+            </div>
+
+            <div class="flex items-center gap-x-4 select-none">
+              <div class="h-px flex-1 bg-zinc-600"></div>
+              <span class="text-[#112A46] text-sm font-medium">OR</span>
+              <div class="h-px flex-1 bg-zinc-600"></div>
+            </div>
+            <div hlmField>
+              <!-- <button
+                class="hover:cursor-pointer"
+                hlmBtn
+                variant="outline"
+                type="button"
+                (click)="submitGoogleLogin()"
+              >
+                <img
+                  class="w-6 object-contain"
+                  src="../../../assets/logo/icons8-google-windows-11-color/icons8-google-48.png"
+                  alt="Google Icon"
+                />
+                <span>Login with Google</span>
+              </button>
+               -->
+              <div #googleButton class="flex justify-center"></div>
+              <button class="hover:cursor-pointer" hlmBtn variant="outline" type="button">
+                <img
+                  class="w-6 object-contain"
+                  src="../../../assets/logo/icons8-github-logo/icons8-github-logo-64.png"
+                  alt="Github Icon"
+                />
+                <span>Login with GitHub</span>
+              </button>
+              <p hlmFieldDescription class="text-center mt-2! text-[#112A46]">
+                Don't have an account?
+                <button
+                  class="text-[#112A46] font-medium underline hover:text-black hover:cursor-pointer transition-all duration-300 border-none"
+                  type="button"
+                  (click)="switchTo('register')"
+                >
+                  Register
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  } @else {
+    <div class="flex flex-1 flex-col px-6 pt-6 pb-4">
+      <h2 class="text-2xl font-bold text-neutral-900">Welcome back</h2>
+      <p class="text-sm text-[#112A46]">Register your account</p>
+
+      <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+        <div class="mt-8">
+          <!-- input email, password -->
+          <div hlmFieldGroup>
+            <div class="space-y-3">
+              <div hlmField>
+                <label hlmFieldLabel for="field-separator-email">Email</label>
+                <input
+                  hlmInput
+                  id="field-separator-email"
+                  type="email"
+                  placeholder="m@example.com"
+                  formControlName="email"
+                />
+              </div>
+              <div hlmField>
+                <label hlmFieldLabel for="field-separator-password">Password</label>
+                <input
+                  hlmInput
+                  id="field-separator-password"
+                  type="password"
+                  placeholder="Your password"
+                  formControlName="password"
+                />
+              </div>
+              @if (
+                registerForm.hasError('passwordMismatch') &&
+                registerForm.get('confirmedPassword')?.touched
+              ) {
+                <p class="text-red-500">Passwords do not match with Confirmed Password.</p>
+              }
+              <div hlmField>
+                <label hlmFieldLabel for="field-separator-password">Confirmed Password</label>
+                <input
+                  hlmInput
+                  id="field-separator-confirmed-password"
+                  type="password"
+                  placeholder="Retype your password"
+                  formControlName="confirmedPassword"
+                />
+              </div>
+              @if (
+                registerForm.hasError('passwordMismatch') &&
+                registerForm.get('confirmedPassword')?.touched
+              ) {
+                <p class="text-red-500">Confirmed Passwords do not match Password.</p>
+              }
+              <div hlmField>
+                <label hlmFieldLabel for="field-separator-full-name">Full Name</label>
+                <input
+                  hlmInput
+                  id="field-separator-full-name"
+                  type="text"
+                  placeholder="John A"
+                  formControlName="fullName"
+                />
+              </div>
+            </div>
+            <div hlmField>
+              <button class="hover:cursor-pointer!" hlmBtn type="submit">Register</button>
+            </div>
+
+            <div class="flex items-center gap-x-4 select-none">
+              <div class="h-px flex-1 bg-zinc-600"></div>
+              <span class="text-[#112A46] text-sm font-medium">OR</span>
+              <div class="h-px flex-1 bg-zinc-600"></div>
+            </div>
+            <div hlmField>
+              <!-- <button
+                class="hover:cursor-pointer"
+                hlmBtn
+                variant="outline"
+                type="button"
+                (click)="submitGoogleLogin()"
+              >
+                <img
+                  class="w-6 object-contain"
+                  src="../../../assets/logo/icons8-google-windows-11-color/icons8-google-48.png"
+                  alt="Google Icon"
+                />
+                <span>Login with Google</span>
+              </button> -->
+              <div #googleButton class="flex justify-center"></div>
+
+              <button class="hover:cursor-pointer" hlmBtn variant="outline" type="button">
+                <img
+                  class="w-6 object-contain"
+                  src="../../../assets/logo/icons8-github-logo/icons8-github-logo-64.png"
+                  alt="Github Icon"
+                />
+                <span>Login with GitHub</span>
+              </button>
+              <p hlmFieldDescription class="text-center mt-2! text-[#112A46]">
+                Already have an account?
+                <button
+                  class="text-[#112A46] font-medium underline hover:text-black hover:cursor-pointer transition-all duration-300 border-none"
+                  type="button"
+                  (click)="switchTo('login')"
+                >
+                  Login
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  }
+</div>

@@ -1,0 +1,20 @@
+<div class="rounded-lg border border-gray-200 bg-white">
+  <button
+    type="button"
+    (click)="toggle()"
+    class="flex w-full cursor-pointer items-center justify-between px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
+  >
+    {{ title() }}
+    <lucide-icon
+      [name]="'chevron-down'"
+      size="16"
+      class="transition-transform"
+      [class.rotate-180]="isOpen()"
+    />
+  </button>
+  @if (isOpen()) {
+    <div class="border-t border-gray-200 px-4 py-3">
+      <ng-content />
+    </div>
+  }
+</div>

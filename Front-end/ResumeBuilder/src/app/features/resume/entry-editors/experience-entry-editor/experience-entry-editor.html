@@ -1,0 +1,34 @@
+<div class="flex flex-col gap-y-4 rounded-lg border border-gray-200 bg-white p-5">
+  <p class="text-lg font-bold">Edit Entry</p>
+
+  <form [formGroup]="form" class="flex flex-col gap-y-4">
+    <app-form-field label="Position">
+      <input formControlName="title" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+    </app-form-field>
+
+    <app-form-field label="Company">
+      <input formControlName="subTitle" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+    </app-form-field>
+
+    <div class="grid grid-cols-3 gap-3">
+      <app-form-field label="Start date">
+        <input formControlName="startDate" type="month" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+      </app-form-field>
+      <app-form-field label="End date">
+        <input formControlName="endDate" type="month" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+      </app-form-field>
+      <app-form-field label="Location">
+        <input formControlName="location" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+      </app-form-field>
+    </div>
+
+    <label class="flex items-center gap-2">
+      <input formControlName="isCurrent" type="checkbox" />
+      <span class="text-sm">I currently work here</span>
+    </label>
+
+    <app-rich-text-field label="Description" formControlName="description" />
+  </form>
+
+  <app-entry-editor-actions (cancel)="cancel()" (save)="save()" />
+</div>

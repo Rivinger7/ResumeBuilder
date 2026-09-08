@@ -1,0 +1,9 @@
+<div class="flex flex-row items-baseline justify-between">
+  <p class="font-bold">{{ entry().position }} — {{ entry().companyName }}</p>
+  <p class="text-[#757575]">
+    {{ formatDateRange(entry().startDate, entry().endDate, entry().isCurrent) }}
+  </p>
+</div>
+@if (entry().description) {
+  <div class="rich-text" [innerHTML]="convertToDescriptionHtml(entry().description)"></div>
+}

@@ -1,0 +1,40 @@
+<div class="flex flex-col gap-y-4 rounded-lg border border-gray-200 bg-white p-5">
+  <p class="text-lg font-bold">Edit Entry</p>
+
+  <form [formGroup]="form" class="flex flex-col gap-y-4">
+    <div class="flex flex-col gap-y-1">
+      <span class="text-sm font-bold">Title</span>
+      <div class="flex gap-2">
+        <input formControlName="title" class="w-full rounded-md bg-gray-100 px-3 py-2 text-sm" />
+        <span
+          class="flex shrink-0 items-center gap-1 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium"
+        >
+          <lucide-icon [name]="'link'" size="14" />
+          Link
+        </span>
+      </div>
+      <input
+        formControlName="linkUrl"
+        placeholder="https://..."
+        class="rounded-md bg-gray-100 px-3 py-2 text-sm"
+      />
+    </div>
+
+    <app-form-field label="Subtitle">
+      <input formControlName="subTitle" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+    </app-form-field>
+
+    <div class="grid grid-cols-2 gap-3">
+      <app-form-field label="Start date">
+        <input formControlName="startDate" type="month" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+      </app-form-field>
+      <app-form-field label="End date">
+        <input formControlName="endDate" type="month" class="rounded-md bg-gray-100 px-3 py-2 text-sm" />
+      </app-form-field>
+    </div>
+
+    <app-rich-text-field label="Description" formControlName="description" />
+  </form>
+
+  <app-entry-editor-actions (cancel)="cancel()" (save)="save()" />
+</div>
